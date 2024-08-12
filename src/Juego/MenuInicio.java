@@ -9,19 +9,19 @@ import javax.swing.JFrame;
 
 public class MenuInicio extends JFrame {
     ArrayList<Usuario> Usuarios;
-    ArrayList<Registros> Todoslos_Logs;
+    ArrayList<Registros> registros;
 
     FondoInicio fondo = new FondoInicio();
 
-    public MenuInicio(ArrayList<Usuario> UsuariosObtenidos, ArrayList<Registros> Todoslos_Logs_A) {
+    public MenuInicio(ArrayList<Usuario> UsuariosObtenidos, ArrayList<Registros> registros) {
         Usuarios = new ArrayList<>();
         if (UsuariosObtenidos != null) {
             Usuarios = UsuariosObtenidos;
         }
 
-        Todoslos_Logs = new ArrayList<>();
-        if (Todoslos_Logs_A != null) {
-            Todoslos_Logs = Todoslos_Logs_A;
+        registros=new ArrayList<>();
+        if(registros!=null) {
+            this.registros=registros;
         }
 
         this.setContentPane(fondo);
@@ -116,7 +116,7 @@ public class MenuInicio extends JFrame {
     }
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {
-        InicioSesion ObjetoLogin = new InicioSesion(Usuarios, this.Todoslos_Logs);
+        InicioSesion ObjetoLogin = new InicioSesion(Usuarios, this.registros);
         ObjetoLogin.setVisible(true);
         this.dispose();
     }
@@ -126,7 +126,7 @@ public class MenuInicio extends JFrame {
     }
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {
-        CrearPlayer ObjetoCrearPlayer = new CrearPlayer(Usuarios, this.Todoslos_Logs);
+        CrearPlayer ObjetoCrearPlayer = new CrearPlayer(Usuarios, this.registros);
         ObjetoCrearPlayer.setVisible(true);
         this.dispose();
     }

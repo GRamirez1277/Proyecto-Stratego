@@ -119,7 +119,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {
         String[] buttons = {"Ranking", "Batallas"};
         int returnValue = JOptionPane.showOptionDialog(null, "", "Elija una opción",
-                JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[0]);
+                JOptionPane.WARNING_MESSAGE, 1, null, buttons, buttons[0]);
 
         if (returnValue == 0) {
             Ranking ObjRank = new Ranking(this.Usuarios, this.indexUser, this.Todoslos_Logs);

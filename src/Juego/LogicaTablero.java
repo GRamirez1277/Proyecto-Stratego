@@ -12,9 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-
 public class LogicaTablero {
-
     boolean AsignaciondeLugares = true;
     boolean TurnoHeroe = true;
     int ContadorSeleccion = 0;
@@ -22,194 +20,128 @@ public class LogicaTablero {
     Personaje[][] MatrizTablero;
     Personaje[][] MatrizHeroe;
     Personaje[][] MatrizVillano;
-
     int seleccionX;
     int seleccionY;
-
     int seleccionHeroeX = -1;
     int seleccionHeroeY = -1;
 
     Dimension CoordTablero_Viejas = new Dimension(-1, -1);
 
-    // boolean turnoHeroe = true;
-    //CONSTRUCTOR
     public LogicaTablero() {
-
-        String NombresPersonajes[] = {"Black Widow", "Night Crawler", "Elektra", "Storm", "Dr Strange", "Elena", "Gambit", "SpiderGirl", "Iceman", "Emma Frost",
-            "She Hulk", "Coloso", "Antman", "Bestia", "Mole", "Punisher", "Blade", "Ghost Rider", "Antorcha Humana", "Mujer Invisible",
-            "Cyclops", "Thor", "Ironman", "Hulk", "Silver Surfer", "Daredevil", "Namor", "Aguja Dinamica", "Spiderman", "Nick el Furioso",
-            "Profesor X", "Capitan America", "Mr Fantastic", "BOMBA", "BOMBA", "BOMBA", "BOMBA", "BOMBA", "BOMBA", "PLANETA"};
-        
-        
-        
-        
-          String NombresPersonajesVillanos[] = {"Espia", "Centinela", "Centinela", "Ultron", "Morbius (El Morboso)", "Sandman", "El Lider", "Poison", "Elektro (EHH)", "Rhino",
-            "El Lagarto", "El Hombre Topo", "Jugernaut", "Carnage", "Black Cat", "Thanos", "Abominacion", "Craven", "Mystique", "Octopus",
-            "Misterioso", "Deadpool (Batman)", "Wishplash", "Craneo Rojo", "OnSlaught", "Spot", "Apocalypse", "Duende Verde", "Venom", "Kin Pin",
-            "Magneto", "Galactus", "Doom", "BOMBA", "BOMBA", "BOMBA", "BOMBA", "BOMBA", "BOMBA", "PLANETA"};
-
-        //                   Altura Anchura
+        String NombresPersonajes[] = {"Black Widow", "Night Crawler", "Elektra", "Storm", "Dr. Strange", "Elena", "Gambit", "SpiderGirl", "Iceman", "Emma Frost",
+            "She-Hulk", "Coloso", "Antman", "Bestia", "Mole", "Punisher", "Blade", "Ghost Rider", "Antorcha Humana", "Mujer Invisible",
+            "Cíclope", "Thor", "Iron-Man", "Hulk", "Silver Surfer", "Daredevil", "Namor", "Aguja Dinamica", "Spiderman", "Nick Fury",
+            "Profesor X", "Capitán América", "Mr. Fantastico", "BOMBA", "BOMBA", "BOMBA", "BOMBA", "BOMBA", "BOMBA", "TIERRA"};
+          String NombresPersonajesVillanos[] = {"Espia", "Centinela", "Centinela", "Ultron", "Morbius", "Sandman", "El Lider", "Poison", "Electro", "Rhino",
+            "El Lagarto", "El Hombre Topo", "Jugernaut", "Carnage", "Black Cat", "Thanos", "Abominación", "Craven", "Mystique", "Octopus",
+            "Misterioso", "Deadpool", "Wishplash", "Craneo Rojo", "Onslaught", "Spot", "Apocalypse", "Duende Verde", "Venom", "Kin Pin",
+            "Magneto", "Galactus", "Doom", "BOMBA", "BOMBA", "BOMBA", "BOMBA", "BOMBA", "BOMBA", "TIERRA"};
         MatrizTablero = new Personaje[10][10];
         MatrizHeroe = new Personaje[10][4];
         MatrizVillano = new Personaje[10][4];
-
-        //ancho
         for (int i = 0; i < MatrizTablero.length; i++) {
-
             for (int j = 0; j < MatrizTablero[0].length; j++) {
                 MatrizTablero[i][j] = null;
             }
         }
-
         MatrizTablero[4][2] = new Personaje(0, "Muro", -1, true);
         MatrizTablero[5][2] = new Personaje(0, "Muro", -1, true);
         MatrizTablero[4][3] = new Personaje(0, "Muro", -1, true);
         MatrizTablero[5][3] = new Personaje(0, "Muro", -1, true);
-
         MatrizTablero[4][6] = new Personaje(0, "Muro", -1, true);
         MatrizTablero[5][6] = new Personaje(0, "Muro", -1, true);
         MatrizTablero[4][7] = new Personaje(0, "Muro", -1, true);
         MatrizTablero[5][7] = new Personaje(0, "Muro", -1, true);
-
         for (int i = 0; i < MatrizTablero.length; i++) {
-
             for (int j = 0; j < MatrizTablero[0].length; j++) {
-
                 if (MatrizTablero[i][j] == null) {
                 } else {
                 }
-
             }
-
         }
 
         int RangosBase[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
         int PersonajesBase[] = {1, 8, 5, 4, 4, 4, 3, 2, 1, 1, 6, 1};
-
         int Lugar = 0;
         int Completados = 0;
         int Personajes = 1;
-
         for (int i = 0; i < MatrizHeroe.length; i++) {
-
             for (int j = 0; j < MatrizHeroe[0].length; j++) {
                 if (Completados == 0) {
                     Completados = PersonajesBase[Lugar];
                 }
-
                 MatrizHeroe[i][j] = new Personaje(Personajes, NombresPersonajes[Personajes - 1], RangosBase[Lugar], true);
                 Completados--;
                 Personajes++;
                 if (Completados == 0) {
                     Lugar++;
                 }
-
             }
-        }
-
-        //IMPRESION Heroe
-        for (int i = 0; i < MatrizHeroe.length; i++) {
-
-            for (int j = 0; j < MatrizHeroe[0].length; j++) {
-
-            }
-
         }
         Lugar = 0;
         Completados = 0;
         Personajes = 1;
         for (int i = 0; i < MatrizVillano.length; i++) {
-
             for (int j = 0; j < MatrizVillano[0].length; j++) {
                 if (Completados == 0) {
                     Completados = PersonajesBase[Lugar];
                 }
-
                 MatrizVillano[i][j] = new Personaje(Personajes, NombresPersonajes[Personajes - 1], RangosBase[Lugar], false);
                 Completados--;
                 Personajes++;
                 if (Completados == 0) {
                     Lugar++;
                 }
-
             }
         }
-
         for (int i = 0; i < MatrizVillano.length; i++) {
 
             for (int j = 0; j < MatrizVillano[0].length; j++) {
-
             }
-
         }
-
     }
 
     public LogicaTablero(boolean JuegodePrueba) {
         JuegodePrueba = true;
         AsignaciondeLugares = false;
-        String NombresPersonajes[] = {"Black Widow", "Night Crawler", "Elektra", "Storm", "Dr Strange", "Elena", "Gambit", "SpiderGirl", "Iceman", "Emma Frost",
-            "She Hulk", "Coloso", "Antman", "Bestia", "Mole", "Punisher", "Blade", "Ghost Rider", "Antorcha Humana", "Mujer Invisible",
-            "Cyclops", "Thor", "Ironman", "Hulk", "Silver Surfer", "Daredevil", "Namor", "Aguja Dinamica", "Spiderman", "Nick el Furioso",
-            "Profesor X", "Capitan America", "Mr Fantastic", "BOMBA", "BOMBA", "BOMBA", "BOMBA", "BOMBA", "BOMBA", "PLANETA"};
+        String NombresPersonajes[] = {"Black Widow", "Night Crawler", "Elektra", "Storm", "Dr. Strange", "Elena", "Gambit", "SpiderGirl", "Iceman", "Emma Frost",
+            "She-Hulk", "Coloso", "Antman", "Bestia", "Mole", "Punisher", "Blade", "Ghost Rider", "Antorcha Humana", "Mujer Invisible",
+            "Cíclope", "Thor", "Iron-Man", "Hulk", "Silver Surfer", "Daredevil", "Namor", "Wolverine", "Spiderman", "Nick Fury",
+            "Profesor X", "Capitán América", "Mr. Fantastico", "BOMBA", "BOMBA", "BOMBA", "BOMBA", "BOMBA", "BOMBA", "PLANETA"};
         
-          String NombresPersonajesVillanos[] = {"Espia", "Centinela", "Centinela", "Ultron", "Morbius (El Morboso)", "Sandman", "El Lider", "Poison", "Elektro (EHH)", "Rhino",
-            "El Lagarto", "El Hombre Topo", "Jugernaut", "Carnage", "Black Cat", "Thanos", "Abominacion", "Craven", "Mystique", "Octopus",
-            "Misterioso", "Deadpool (Batman)", "Wishplash", "Craneo Rojo", "OnSlaught", "Spot", "Apocalypse", "Duende Verde", "Venom", "Kin Pin",
+          String NombresPersonajesVillanos[] = {"Espia", "Centinela", "Centinela", "Ultron", "Morbius", "Sandman", "El Lider", "Poison", "Electro", "Rhino",
+            "El Lagarto", "El Hombre Topo", "Jugernaut", "Carnage", "Black Cat", "Thanos", "Abominación", "Craven", "Mystique", "Octopus",
+            "Misterioso", "Deadpool", "Wishplash", "Craneo Rojo", "Onslaught", "Spot", "Apocalypse", "Duende Verde", "Venom", "Kin Pin",
             "Magneto", "Galactus", "Doom", "BOMBA", "BOMBA", "BOMBA", "BOMBA", "BOMBA", "BOMBA", "PLANETA"};
-
         MatrizTablero = new Personaje[10][10];
         MatrizHeroe = new Personaje[10][4];
         MatrizVillano = new Personaje[10][4];
-
         for (int i = 0; i < MatrizTablero.length; i++) {
-
             for (int j = 0; j < MatrizTablero[0].length; j++) {
                 MatrizTablero[i][j] = null;
-
             }
         }
         MatrizTablero[4][2] = new Personaje(0, "Muro", -1, true);
         MatrizTablero[5][2] = new Personaje(0, "Muro", -1, true);
         MatrizTablero[4][3] = new Personaje(0, "Muro", -1, true);
         MatrizTablero[5][3] = new Personaje(0, "Muro", -1, true);
-
         MatrizTablero[4][6] = new Personaje(0, "Muro", -1, true);
         MatrizTablero[5][6] = new Personaje(0, "Muro", -1, true);
         MatrizTablero[4][7] = new Personaje(0, "Muro", -1, true);
         MatrizTablero[5][7] = new Personaje(0, "Muro", -1, true);
 
-        for (int i = 0; i < MatrizTablero.length; i++) {
-
-            for (int j = 0; j < MatrizTablero[0].length; j++) {
-
-                if (MatrizTablero[i][j] == null) {
-
-
-                } else {
-                }
-
-            }
-
-        }
-
         int RangosBase[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
         int PersonajesBase[] = {1, 8, 5, 4, 4, 4, 3, 2, 1, 1, 6, 1};
-
         int Lugar = 0;
         int Completados = 0;
         int Personajes = 1;
-
              ArrayList<Personaje> ListadeHeroes = new   ArrayList<Personaje>();
         
         for (int i = 0; i < MatrizHeroe.length; i++) {
-
             for (int j = 0; j < MatrizHeroe[0].length; j++) {
                 if (Completados == 0) {
                     Completados = PersonajesBase[Lugar];
                 }
-
-                
                 MatrizHeroe[i][j] = new Personaje(Personajes, NombresPersonajes[Personajes - 1], RangosBase[Lugar], true);
                  ListadeHeroes.add(new Personaje(Personajes, NombresPersonajes[Personajes - 1], RangosBase[Lugar], true));
                   Completados--;
@@ -217,33 +149,21 @@ public class LogicaTablero {
                 if (Completados == 0) {
                     Lugar++;
                 }
-
             }
         }
 
-        for (int i = 0; i < MatrizHeroe.length; i++) {
-
-            for (int j = 0; j < MatrizHeroe[0].length; j++) {
-
-            }
-
-        }
         Lugar = 0;
         Completados = 0;
         Personajes = 1;
-        
                  ArrayList<Personaje> ListadeVillanos = new   ArrayList<Personaje>();
         
         for (int i = 0; i < MatrizVillano.length; i++) {
-
             for (int j = 0; j < MatrizVillano[0].length; j++) {
                 if (Completados == 0) {
                     Completados = PersonajesBase[Lugar];
                 }
-
                 MatrizVillano[i][j] = new Personaje(Personajes, NombresPersonajesVillanos[Personajes - 1], RangosBase[Lugar], false);
                   ListadeVillanos.add(new Personaje(Personajes, NombresPersonajesVillanos[Personajes - 1], RangosBase[Lugar], false));
-                
                 Completados--;
                 Personajes++;
                 if (Completados == 0) {
@@ -252,41 +172,23 @@ public class LogicaTablero {
 
             }
         }
-
-        for (int i = 0; i < MatrizVillano.length; i++) {
-
-            for (int j = 0; j < MatrizVillano[0].length; j++) {
-
-            }
-
-        }
-        
-     
               LinkedHashSet<Integer> PosicionesHeroe = new LinkedHashSet<Integer>();
          Random randNum = new Random();
-
         for (int i = 0; i < 40; i++) {
-
             if (i == 0) {
   PosicionesHeroe.add(randNum.nextInt(39 - 32) + 32);
-                
             } else if (i <= 3 && i >= 1) {
 while(PosicionesHeroe.size() < 4){
              Integer[] LHSArray = new Integer[PosicionesHeroe.size()];
         LHSArray = PosicionesHeroe.toArray(LHSArray);
-                    
-                    
-                    
                      PosicionesHeroe.add((LHSArray[0])+1);
                         PosicionesHeroe.add((LHSArray[0])-1);
                               PosicionesHeroe.add((LHSArray[0])-10);
-                
 }
            } else if (i <= 6 && i >= 4) {
                 while(PosicionesHeroe.size() < 7){
                   PosicionesHeroe.add(randNum.nextInt(40 - 21) + 21);
                 } 
-
             } else if (i <= 14 && i >= 7) {
   while(PosicionesHeroe.size() < 15){
                  PosicionesHeroe.add(randNum.nextInt(20 - 1) + 1);
@@ -303,37 +205,25 @@ while(PosicionesHeroe.size() < 4){
             } 
 
         }
-
-        
-        
               Integer[] Posiciones = new Integer[PosicionesHeroe.size()];
         Posiciones = PosicionesHeroe.toArray(Posiciones);
         
         AsignarLugar(Posiciones, 0, ListadeHeroes, 39, false);
-        
         for(int i = 1; i <= 6; i++){
             AsignarLugar(Posiciones, i, ListadeHeroes, 39-i, false);
         }
-         
-        
         for(int i = 7; i <= 14; i++){
             AsignarLugar(Posiciones, i, ListadeHeroes, 1+(i-7), false);
         }
           AsignarLugar(Posiciones, 15, ListadeHeroes, 0, false);
-          
          for(int i = 16; i < 40; i++){
                AsignarLugar(Posiciones, i, ListadeHeroes, 9+(i-16), false);
          }
-      
-
      LinkedHashSet<Integer> PosicionesVillano = new LinkedHashSet<Integer>();
          Random randNumV = new Random();
-
         for (int i = 0; i < 40; i++) {
-
             if (i == 0) {
   PosicionesVillano.add(randNum.nextInt(39 - 32) + 32);
-                
             } else if (i <= 3 && i >= 1) {
 while(PosicionesVillano.size() < 4){
              Integer[] LHSArray = new Integer[PosicionesVillano.size()];
@@ -341,15 +231,12 @@ while(PosicionesVillano.size() < 4){
                      PosicionesVillano.add((LHSArray[0])+1);
                         PosicionesVillano.add((LHSArray[0])-1);
                               PosicionesVillano.add((LHSArray[0])-10);
-                
 }
            } else if (i <= 6 && i >= 4) {
                 while(PosicionesVillano.size() < 7){
                   PosicionesVillano.add(randNum.nextInt(40 - 21) + 21);
                 } 
-
             } else if (i <= 14 && i >= 7) {
-              
   while(PosicionesVillano.size() < 15){
                  PosicionesVillano.add(randNum.nextInt(20 - 1) + 1);
                  } 
@@ -361,17 +248,12 @@ while(PosicionesVillano.size() < 4){
               PosicionesVillano.add(40);
          }
                      }
-                     
             } 
 
         }
-        
-        
           Integer[] PosicionesV = new Integer[PosicionesVillano.size()];
         Posiciones = PosicionesVillano.toArray(PosicionesV);
-        
         AsignarLugar(PosicionesV, 0, ListadeVillanos, 39, true);
-        
         for(int i = 1; i <= 6; i++){
             AsignarLugar(PosicionesV, i, ListadeVillanos, 39-i, true);
         }
@@ -385,7 +267,6 @@ while(PosicionesVillano.size() < 4){
          }
     }
     public void AsignarLugar( Integer[]  Posiciones, int i, ArrayList<Personaje> ListaPersonajes, int lugar, boolean EsVillano){
-       
         if(EsVillano){
             switch (Posiciones[i]) {
     case 1:
@@ -632,15 +513,10 @@ while(PosicionesVillano.size() < 4){
     case 40:
            this.MatrizTablero[9][9] = ListaPersonajes.get(lugar);
         break;
-   
 }
         }
        
     }
-    
-    
-    
-    //------------------------GETS SETS-----------------------------------
     public Personaje[][] getMatrizTablero() {
         return this.MatrizTablero;
     }
@@ -652,7 +528,6 @@ while(PosicionesVillano.size() < 4){
     public Personaje[][] getMatrizVillano() {
         return MatrizVillano;
     }
-
     public int getGanadorPorBandera() {
         return GanadorPorBandera;
     }
@@ -717,18 +592,18 @@ while(PosicionesVillano.size() < 4){
     public boolean Controlador_de_Movimientos(Dimension CoordenadasNuevas) {
 try{
         if (CoordTablero_Viejas.width == -1 && CoordTablero_Viejas.height == -1) {
-            if (MatrizTablero[CoordenadasNuevas.height][CoordenadasNuevas.width] == null) { // no selecciono
-                JOptionPane.showMessageDialog(null, "Debes Seleccionar a Un player");
+            if (MatrizTablero[CoordenadasNuevas.height][CoordenadasNuevas.width] == null) {
+                JOptionPane.showMessageDialog(null, "Debes seleccionar un jugador");
                 CoordTablero_Viejas = new Dimension(-1, -1);
                 return false;
             }
             if (MatrizTablero[CoordenadasNuevas.height][CoordenadasNuevas.width].getRango() == 11) {
-                JOptionPane.showMessageDialog(null, "Las bombas no pueden moverse");
+                JOptionPane.showMessageDialog(null, "Es una bomba, no se mueve");
                 CoordTablero_Viejas = new Dimension(-1, -1);
                 return false;
             }
             if (MatrizTablero[CoordenadasNuevas.height][CoordenadasNuevas.width].getRango() == 12) {
-                JOptionPane.showMessageDialog(null, "Los planetas no pueden moverse");
+                JOptionPane.showMessageDialog(null, "Es un planeta, no se mueve");
                 CoordTablero_Viejas = new Dimension(-1, -1);
                 return false;
             }
@@ -738,22 +613,22 @@ try{
                 return false;
             }
             if (MatrizTablero[CoordenadasNuevas.height][CoordenadasNuevas.width].isHeroe_Villano() != this.TurnoHeroe) {
-                JOptionPane.showMessageDialog(null, "Error no es su turno");
+                JOptionPane.showMessageDialog(null, "No es su turno");
                 CoordTablero_Viejas = new Dimension(-1, -1);
                 return false;
             }
             CoordTablero_Viejas = new Dimension(CoordenadasNuevas.width, CoordenadasNuevas.height);
             return false;
         } else {
-            if (MatrizTablero[CoordenadasNuevas.height][CoordenadasNuevas.width] != null) { // Selecciono Pero choca o ZONA PROHIBIDA
+            if (MatrizTablero[CoordenadasNuevas.height][CoordenadasNuevas.width] != null) { 
                 if (MatrizTablero[CoordenadasNuevas.height][CoordenadasNuevas.width].getRango() == -1) {
                     JOptionPane.showMessageDialog(null, "Zona Prohibida");
                     CoordTablero_Viejas = new Dimension(-1, -1);
                     return false;
                 } else if (MatrizTablero[CoordenadasNuevas.height][CoordenadasNuevas.width].isHeroe_Villano() != TurnoHeroe) {
                     if(MatrizTablero[CoordTablero_Viejas.height][CoordTablero_Viejas.width].getRango()==2){
-                        int reply = JOptionPane.showConfirmDialog(null, "Deseas Combatir?", "Combate", JOptionPane.YES_NO_OPTION);
-                        if (reply == JOptionPane.YES_OPTION) {
+                        int reply = 0;
+                        if (reply == 0) {
                             return Combates(CoordenadasNuevas);
                     }}else
                     if ((CoordenadasNuevas.height == CoordTablero_Viejas.height + 1
@@ -773,8 +648,8 @@ try{
                                || (CoordenadasNuevas.height == CoordTablero_Viejas.height-1
                             && CoordenadasNuevas.width == CoordTablero_Viejas.width+1)
                             ) {
-                        int reply = JOptionPane.showConfirmDialog(null, "Deseas Combatir?", "Combate", JOptionPane.YES_NO_OPTION);
-                        if (reply == JOptionPane.YES_OPTION) {
+                        int reply = 0;
+                        if (reply == 0) {
 
                             return Combates(CoordenadasNuevas);
                         } else {
@@ -798,11 +673,11 @@ try{
                 setTurnoHeroe(!this.TurnoHeroe);
                 String Turno = "";
                 if (TurnoHeroe) {
-                    Turno = "HÉROES";
+                    Turno = "héroes";
                 } else {
-                    Turno = "VILLANOS";
+                    Turno = "villanos";
                 }
-                JOptionPane.showMessageDialog(null, "Ahora es turno de: " + Turno);
+                JOptionPane.showMessageDialog(null, "Ahora es turno de los " + Turno);
                 CoordTablero_Viejas = new Dimension(-1, -1);
                 return true;
             } else {
@@ -853,17 +728,11 @@ return true;
             icon2 = new ImageIcon(getClass().getResource("/Imagenes/Fichas/Villanos/" + MatrizTablero[CoordTablero_Viejas.height][CoordTablero_Viejas.width].getID() + ".jpg"));
         }
         String Texto = 
-                "<html><br><br>"+ MatrizTablero[CoordenadasNuevas.height][CoordenadasNuevas.width].getNombre() +"<br><br>"
-                + "\nRango: " + MatrizTablero[CoordenadasNuevas.height][CoordenadasNuevas.width].getRango()+"<br><br>"
-                + "\n VS "+"<br><br>"
-                + "\n"+  MatrizTablero[CoordTablero_Viejas.height][CoordTablero_Viejas.width].getNombre()+"<br><br>"
-                + "\nRango: "+ MatrizTablero[CoordTablero_Viejas.height][CoordTablero_Viejas.width].getRango() + "</html>";
+                MatrizTablero[CoordenadasNuevas.height][CoordenadasNuevas.width].getNombre() +"de Rango: " + MatrizTablero[CoordenadasNuevas.height][CoordenadasNuevas.width].getRango()
+                + " VS "+   MatrizTablero[CoordTablero_Viejas.height][CoordTablero_Viejas.width].getNombre()
+                + "de Rango: "+ MatrizTablero[CoordTablero_Viejas.height][CoordTablero_Viejas.width].getRango();
         JPanel Panel_Combate = new JPanel();
         JPanel Temporal = new JPanel();
-        JLabel Icono1 = new JLabel(icon1);
-        JLabel Icono2 = new JLabel(icon2);
-        Temporal.add(Icono1);
-        Temporal.add(Icono2);
         JLabel MostrarTexto = new JLabel(Texto, SwingConstants.CENTER);
         Panel_Combate.setLayout(new BorderLayout()); 
         Panel_Combate.add(MostrarTexto, BorderLayout.NORTH);
@@ -871,21 +740,21 @@ return true;
         Panel_Combate.add(MostrarTexto, BorderLayout.SOUTH);
        setTurnoHeroe(!this.TurnoHeroe);
         if (MatrizTablero[CoordenadasNuevas.height][CoordenadasNuevas.width] == null || MatrizTablero[CoordTablero_Viejas.height][CoordTablero_Viejas.width] == null) {
-            JOptionPane.showMessageDialog(null, "Combate No valido temporal");
+            JOptionPane.showMessageDialog(null, "Combate no válido");
             return false;
         }
         if (MatrizTablero[CoordenadasNuevas.height][CoordenadasNuevas.width].getRango() == 12) {
 if(MatrizTablero[CoordTablero_Viejas.height][CoordTablero_Viejas.width].isHeroe_Villano()){
       JOptionPane.showMessageDialog(
                 null,
-                "EL PLANETA!! :)",
-                "Planeta Encontrado", JOptionPane.PLAIN_MESSAGE,icon2 );
+                "Has salavado la Tierra!",
+                "Encontró la Tierra", JOptionPane.PLAIN_MESSAGE,icon2 );
    this.setGanadorPorBandera(1);
 }else{
            JOptionPane.showMessageDialog(
                 null,
-                "EL PLANETA!! :)",
-                "Planeta Encontrado", JOptionPane.PLAIN_MESSAGE,icon1 );
+                "Has conquistado la Tierra!",
+                "Encontró la Tierra", JOptionPane.PLAIN_MESSAGE,icon1 );
     this.setGanadorPorBandera(2);
 }
             return true;
@@ -894,8 +763,8 @@ if(MatrizTablero[CoordTablero_Viejas.height][CoordTablero_Viejas.width].isHeroe_
             if (MatrizTablero[CoordTablero_Viejas.height][CoordTablero_Viejas.width].getRango() == 3) {
                JOptionPane.showMessageDialog(
                 null,
-                "Bomba desactivada:)",
-                "BOMBA DESACTIVADA", JOptionPane.PLAIN_MESSAGE,icon2 );
+                "No explotó",
+                "BOMBA", JOptionPane.PLAIN_MESSAGE,icon2 );
                 PersonajeMuerto(MatrizTablero[CoordenadasNuevas.height][CoordenadasNuevas.width].isHeroe_Villano(), MatrizTablero[CoordenadasNuevas.height][CoordenadasNuevas.width].getID());
                 MatrizTablero[CoordenadasNuevas.height][CoordenadasNuevas.width] = MatrizTablero[CoordTablero_Viejas.height][CoordTablero_Viejas.width];
                       MatrizTablero[CoordTablero_Viejas.height][CoordTablero_Viejas.width] = null;
@@ -912,7 +781,7 @@ if(MatrizTablero[CoordTablero_Viejas.height][CoordTablero_Viejas.width].isHeroe_
              JOptionPane.showMessageDialog(
                 null,
                 Panel_Combate,
-                "Combate", JOptionPane.PLAIN_MESSAGE);
+                "Pelea en curso", JOptionPane.PLAIN_MESSAGE);
         if (MatrizTablero[CoordTablero_Viejas.height][CoordTablero_Viejas.width].getRango() == 1 && MatrizTablero[CoordenadasNuevas.height][CoordenadasNuevas.width].getRango() == 10) {
             PersonajeMuerto(MatrizTablero[CoordenadasNuevas.height][CoordenadasNuevas.width].isHeroe_Villano(), MatrizTablero[CoordenadasNuevas.height][CoordenadasNuevas.width].getRango());
             MatrizTablero[CoordenadasNuevas.height][CoordenadasNuevas.width] = MatrizTablero[CoordTablero_Viejas.height][CoordTablero_Viejas.width];
@@ -960,7 +829,6 @@ if(MatrizTablero[CoordTablero_Viejas.height][CoordTablero_Viejas.width].isHeroe_
 
         }
     }
-    
     public int SinMovimientos(){
         boolean VillanoTieneMovimientos = false;
          boolean HeroeTieneMovimientos = false;
@@ -1061,7 +929,6 @@ if(MatrizTablero[CoordTablero_Viejas.height][CoordTablero_Viejas.width].isHeroe_
                     }
                 }
     }
-      
     if(VillanoTieneMovimientos && HeroeTieneMovimientos){
         return 1;
     }else if(VillanoTieneMovimientos){
